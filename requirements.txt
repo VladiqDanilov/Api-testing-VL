@@ -1,4 +1,6 @@
 httpx==0.24.1
 pytest==7.4.0
+requests==2.7.0
+
 pydantic==2.3.0
 python-dotenv==1.0.0
