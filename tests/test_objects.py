@@ -1,3 +1,4 @@
+import requests
 from api.api_client import ApiClient
 import pytest
 
@@ -15,6 +16,26 @@ class TestObjects:
     @pytest.fixture(scope='class')
     def client(self):
         return ApiClient()
+
+    def test_create_object():
+        payload = {
+            "name": "Apple MacBook Pro 16",
+            "data": {
+                "year": 2019,
+                "price": 1849.99,
+                "CPU model": "Intel Core i9",
+                "Hard disk size": "1 TB"
+            }
+        }
+        response = requests.post(url='https://api.restful-api.dev/objects', json=payload).json()
+        
+        assert response['name'] == payload['name']
+    
+    def test_get_object():
+        obj_id = 'ff8081818d6670fb018d7db2b186150c'
+        response = requests.get(f'https://api.restful-api.dev/objects/{obj_id}').json()
+        
+        assert response['id'] == obj_id
 
     def test_get_objects(self, client, request):
         """
