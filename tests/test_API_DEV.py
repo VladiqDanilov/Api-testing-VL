@@ -82,8 +82,7 @@ def test_delete_object():
     get_response = requests.get(f"{BASE_URL}/{obj_id}")
     assert get_response.status_code == 404
 
-# ===== Плохие тесты (ожидаем фейлы) =====
-'''
+
 def test_fail_wrong_status_code():
     sleep_if_needed(7)
     response = requests.get(BASE_URL)
@@ -95,9 +94,7 @@ def test_fail_post_without_name():
         "data": {"capacity": "64 GB"}
     }
     response = requests.post(BASE_URL, json=payload)
-    assert response.status_code == 400  # Но API вернёт 200 → тест упадёт
-'''
-# ===== Дополнительные тесты для покрытия =====
+    assert response.status_code == 400
 
 def test_get_object_not_found():
     sleep_if_needed(9)
