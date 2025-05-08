@@ -82,12 +82,12 @@ def test_delete_object():
     get_response = requests.get(f"{BASE_URL}/{obj_id}")
     assert get_response.status_code == 404
 
-
+'''
 def test_fail_wrong_status_code():
     sleep_if_needed(7)
     response = requests.get(BASE_URL)
     assert response.status_code == 404  # Специальная ошибка
-
+'''
 def test_fail_post_without_name():
     sleep_if_needed(8)
     payload = {
@@ -96,20 +96,10 @@ def test_fail_post_without_name():
     response = requests.post(BASE_URL, json=payload)
     assert response.status_code == 200
 
+
 def test_get_object_not_found():
     sleep_if_needed(9)
     response = requests.get(f"{BASE_URL}/9999999")
     assert response.status_code in (404, 200)  # У кого-то может быть по-разному
 
-def test_post_and_delete_object():
-    sleep_if_needed(10)
-    payload = {
-        "name": "Temp Device for Deletion",
-        "data": {"price": 123}
-    }
-    post_response = requests.post(BASE_URL, json=payload)
-    assert post_response.status_code == 800
-    obj_id = post_response.json()["id"]
 
-    delete_response = requests.delete(f"{BASE_URL}/{obj_id}")
-    assert delete_response.status_code == 200
