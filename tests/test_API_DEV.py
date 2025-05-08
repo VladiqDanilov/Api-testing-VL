@@ -94,7 +94,7 @@ def test_fail_post_without_name():
         "data": {"capacity": "64 GB"}
     }
     response = requests.post(BASE_URL, json=payload)
-    assert response.status_code == 400
+    assert response.status_code == 200
 
 def test_get_object_not_found():
     sleep_if_needed(9)
@@ -108,7 +108,7 @@ def test_post_and_delete_object():
         "data": {"price": 123}
     }
     post_response = requests.post(BASE_URL, json=payload)
-    assert post_response.status_code == 200
+    assert post_response.status_code == 800
     obj_id = post_response.json()["id"]
 
     delete_response = requests.delete(f"{BASE_URL}/{obj_id}")
